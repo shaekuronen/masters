@@ -1,6 +1,8 @@
 import Model from 'ampersand-model'
+import githubAuthMixin from '../helpers/github-auth-mixin'
+import ReposCollection from '../collections/repos'
 
-export default Model.extend({
+export default Model.extend(githubAuthMixin, {
   url: 'https://api.github.com/user',
   initialize () {
     this.token = window.localStorage.token
@@ -14,20 +16,17 @@ export default Model.extend({
   session: {
     token: 'string'
   },
+  collections: {
+    repos: ReposCollection
+  },
   onTokenChange () {
     window.localStorage.token = this.token
     this.fetchInitialData()
   },
-  ajaxConfig () {
-    return {
-      headers: {
-        Authorization: 'token ' + this.token
-      }
-    }
-  },
   fetchInitialData () {
     if (this.token) {
       this.fetch()
+      this.repos.fetch()
     }
   }
 })

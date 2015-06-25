@@ -58,7 +58,7 @@ export default Router.extend({
   },
 
   repos () {
-    this.renderPage(<Repos/>)
+    this.renderPage(<Repos repos={app.user.repos}/>)
   }
 
 })
