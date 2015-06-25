@@ -11,6 +11,8 @@ export default React.createClass({
     }
   },
   render () {
+    // es2015 destructure props to get local reference to user
+    const {user} = this.props
     return (
       <nav className='top-nav top-nav-light cf' role='navigation' onClick={this.onClick}>
         <input id='menu-toggle' className='menu-toggle' type='checkbox'/>
@@ -20,7 +22,7 @@ export default React.createClass({
           <li><a href='http://google.com'>Google</a></li>
           <li><a href='/test'>Test</a></li>
           <li><a href='/repos'>Repos</a></li>
-          <li className='pull-right'><a href='/logout'>Logout</a></li>
+          <li className='pull-right'><a href='/logout'>Logout</a> {user.login}</li>
         </ul>
       </nav>
     )
